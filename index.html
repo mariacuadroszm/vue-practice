@@ -9,15 +9,17 @@
 </head>
 <body>
     <script src="https://unpkg.com/vue@next"></script>
-    <div id="app">{{ text }}</div>
+    <div id="app"></div>
     <script>
         const vm = Vue.createApp({
             data() {
                 return {
-                    text: "Hola Maria"
+                    img: "https://i.picsum.photos/id/1/5616/3744.jpg?hmac=kKHwwU8s46oNettHKwJ24qOlIAsWN9d2TtsXDoCWWsQ"
+                    //atri: "src"
                 };
-            }
-        }).mount("#app");
+            }, template: `<img v-bind:src="img" alt v-bind:alt= "img"/>`
+            //si lo quierpo poner como variable el tipo de atributo sería así `<img v-bind:[atri]="img"/>`
+         }).mount("#app");
     </script>
     
 </body>
