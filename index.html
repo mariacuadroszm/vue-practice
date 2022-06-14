@@ -14,21 +14,19 @@
         const vm = Vue.createApp({
             data() {
                 return {
-                    counter: 0
+                    text: "Maria del Mar",
+                    text2: "Holi"
                 };
             }, 
             methods:{
-                increment(){
-                    this.counter ++;
-                },
-
-                decrease(){
-                    this.counter --;
+                cambiartext(evento){
+                    this.text = evento.target.value; //para obtener el valor de un evento siempre debo ponerlo así, porque el value está dentro del target
                 }
             },
-            template: `<button v-on:click="increment">{{ "+1"}}</button>
-            <button v-on:click="decrease">{{ "-1"}}</button>
-            <p>{{ counter }}</p>`
+            template: `<p>{{ text }}</p></br>
+            <input type="text" @input="cambiartext" :value="text"/></br>
+            <p>{{ text2 }}</p></br>
+            <input type="text" v-model="text2"/>` //opción 2 para hacer exactamente lo mismo, no creo ningún mètodo ni requiero v-on ni v-bind
          }).mount("#app");
     </script>
     
