@@ -14,13 +14,24 @@
         const vm = Vue.createApp({
             data() {
                 return {
-                    img: "https://i.picsum.photos/id/1/5616/3744.jpg?hmac=kKHwwU8s46oNettHKwJ24qOlIAsWN9d2TtsXDoCWWsQ"
-                    //atri: "src"
+                    counter: 0
                 };
-            }, template: `<img v-bind:src="img" alt v-bind:alt= "img"/>`
-            //si lo quierpo poner como variable el tipo de atributo sería así `<img v-bind:[atri]="img"/>`
+            }, 
+            methods:{
+                increment(){
+                    this.counter ++;
+                },
+
+                decrease(){
+                    this.counter --;
+                }
+            },
+            template: `<button v-on:click="increment">{{ "+1"}}</button>
+            <button v-on:click="decrease">{{ "-1"}}</button>
+            <p>{{ counter }}</p>`
          }).mount("#app");
     </script>
     
 </body>
-</html>
+</html> 
+
