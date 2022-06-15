@@ -14,19 +14,37 @@
         const vm = Vue.createApp({
             data() {
                 return {
-                    firstName: "Maria del Mar",
-                    lastName: "Cuadros"
+                    text: "Puerta abierta",
+                    open: "true",
+                    
                 };
             },
 
+            watch: {
+                open(value){
+                    if (value){
+                        this.text = "Puerta abierta";
+                    } else {
+                        this.text = "Puerta cerrada";
+                    }
+                    
+                }
+            },
+
             computed: {
-                fullName(){
-                    return this.firstName + " " + this.lastName;
+                openDoor(){
+                  if(this.open){
+                     return "Cerrar";
+                  } else{
+                    return "Abrir";
+                  }
                 }
 
             },
 
-            template: `<p>{{ fullName }}</p>`
+            template: `<p>{{ text }}</p>
+            <button @click="open = !open">{{ openDoor }}</button>
+            `
     
          }).mount("#app");
     </script>
