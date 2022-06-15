@@ -14,19 +14,20 @@
         const vm = Vue.createApp({
             data() {
                 return {
-                    text: "Maria del Mar",
-                    text2: "Holi"
+                    firstName: "Maria del Mar",
+                    lastName: "Cuadros"
                 };
-            }, 
-            methods:{
-                cambiartext(evento){
-                    this.text = evento.target.value; //para obtener el valor de un evento siempre debo ponerlo así, porque el value está dentro del target
-                }
             },
-            template: `<p>{{ text }}</p></br>
-            <input type="text" @input="cambiartext" :value="text"/></br>
-            <p>{{ text2 }}</p></br>
-            <input type="text" v-model="text2"/>` //opción 2 para hacer exactamente lo mismo, no creo ningún mètodo ni requiero v-on ni v-bind
+
+            computed: {
+                fullName(){
+                    return this.firstName + " " + this.lastName;
+                }
+
+            },
+
+            template: `<p>{{ fullName }}</p>`
+    
          }).mount("#app");
     </script>
     
