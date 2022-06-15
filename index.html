@@ -44,11 +44,19 @@
                     this.styles.backgroundColor = "#b5e7a0";
                     return "Abrir";
                   }
+                },
+
+                classType(){
+                    if(this.open){
+                        return ['opened'];
+                    } else {
+                        return ['closed'];
+                    }
                 }
 
             },
 
-            template: `<p>{{ text }}</p>
+            template: `<p :class="classType">{{ text }}</p>
             <button @click="open = !open" :style="styles">{{ openDoor }}</button>
             `
     
