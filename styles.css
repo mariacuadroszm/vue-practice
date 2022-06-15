@@ -1,0 +1,17 @@
+.opened {
+    background-color: rgb(180, 212, 133);
+
+}
+
+.closed {
+    background-color: rgba(207, 118, 118, 0.793);
+
+}
+
+p {
+    width: 200px;
+    height: 150px;
+    border: solid 1px gray;
+    text-align: center;
+    
+}
