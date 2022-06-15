@@ -17,7 +17,20 @@
                 return {
                     text: "Sesión abierta",
                     open: "true",
-                    userName: ""
+                    userName: "",
+                    posts: [{
+                        title: "Titulo 1",
+                        description: "Lorem ipsum..."
+                    }, {
+                        title: "Titulo 2",
+                        description: "Lorem ipsum..."
+                    }, {
+                        title: "Titulo 3",
+                        description: "Lorem ipsum..."
+                    }, {
+                        title: "Titulo 4",
+                        description: "Lorem ipsum..."
+                    }]
                    
                 };
             },
@@ -47,9 +60,17 @@
 
             },
                             
-            template: `<p :class="classType">{{ text }}</p>
+            template: `<div class="main" :class="classType">
+            <p >{{ text }}</p>
             <div v-if="open">
                 <p>Hola, {{ userName }}!</p>
+                <h1>Bienvenida nuevamente!</h1>
+                <p>Aquí encontrarás los comentarios de tus amigos</p>
+                <div v-for="(i, id) in posts" :key="id" class="coments">
+                    <h2>{{ i.title }}</h2>
+                    <p> {{i.description}}</p>
+                </div>
+                 
             </div>
             <div v-else>
                 <label>
@@ -62,6 +83,8 @@
                 <div v-if="!open">Iniciar sesión</div>
                 <div v-else>Cerrar sesión</div>
             </button>
+
+        </div>
             `
     
          }).mount("#app");

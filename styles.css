@@ -8,10 +8,17 @@
 
 }
 
-p {
-    width: 200px;
-    height: 150px;
-    border: solid 1px gray;
-    text-align: center;
-    
+.main {
+    width: 100%;
+    height: 100%; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-items: center;
+}
+.coments{
+    display: flex;
+    flex-direction: column;
+    border: solid 1px black;
+    margin: 1em;
 }
