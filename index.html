@@ -12,7 +12,7 @@
     <script src="https://unpkg.com/vue@next"></script>
     <div id="app"></div>
     <script>
-        const vm = Vue.createApp({
+        const app = Vue.createApp({
             data() {
                 return {
                     text: "Sesión abierta",
@@ -58,7 +58,7 @@
                     }
                 }
 
-            },
+            }, 
                             
             template: `<div class="main" :class="classType">
             <p >{{ text }}</p>
@@ -66,9 +66,12 @@
                 <p>Hola, {{ userName }}!</p>
                 <h1>Bienvenida nuevamente!</h1>
                 <p>Aquí encontrarás los comentarios de tus amigos</p>
-                <div v-for="(i, id) in posts" :key="id" class="coments">
-                    <h2>{{ i.title }}</h2>
-                    <p> {{i.description}}</p>
+                <div class="coments">
+                    <item v-for="(i, id) in posts" 
+                    :key="id"
+                    :post="i" 
+                    />
+                    
                 </div>
                  
             </div>
@@ -87,7 +90,21 @@
         </div>
             `
     
-         }).mount("#app");
+         })
+         
+         app.component ("item", {
+
+            props: ["post"],
+
+            template: `
+                <div class="coments">
+                    <h2>{{ post.title }}</h2>
+                    <p> {{post.description}}</p>
+                </div>
+                `
+         })
+
+         const vm = app.mount("#app");
     </script>
     
 
