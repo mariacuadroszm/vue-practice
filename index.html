@@ -15,49 +15,53 @@
         const vm = Vue.createApp({
             data() {
                 return {
-                    text: "Puerta abierta",
+                    text: "Sesión abierta",
                     open: "true",
-                    styles: {
-                        backgroundColor: "#eca1a6"
-                    }
-                    
+                    userName: ""
+                   
                 };
             },
 
             watch: {
                 open(value){
                     if (value){
-                        this.text = "Puerta abierta";
+                        this.text = "Sesión abierta";
                     } else {
-                        this.text = "Puerta cerrada";
+                        this.text = "Sesión cerrada";
                     }
                     
                 }
             },
 
             computed: {
-                openDoor(){
-                  if(this.open){
-                      this.styles.backgroundColor = "#eca1a6"; //hago asignación del nuevo color
-                     return "Cerrar";
-                  } else{
-                    this.styles.backgroundColor = "#b5e7a0";
-                    return "Abrir";
-                  }
-                },
-
-                classType(){
+               
+                classType(){  
                     if(this.open){
                         return ['opened'];
                     } else {
+                        this.userName = "";
                         return ['closed'];
+                        
                     }
                 }
 
             },
-
+                            
             template: `<p :class="classType">{{ text }}</p>
-            <button @click="open = !open" :style="styles">{{ openDoor }}</button>
+            <div v-if="open">
+                <p>Hola, {{ userName }}!</p>
+            </div>
+            <div v-else>
+                <label>
+                    <span>User name</span>
+                    <input type="text" v-model="userName" />
+                    
+                </label>
+            </div>
+            <button @click="open = !open" >
+                <div v-if="!open">Iniciar sesión</div>
+                <div v-else>Cerrar sesión</div>
+            </button>
             `
     
          }).mount("#app");
