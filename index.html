@@ -12,95 +12,32 @@
     <script src="https://unpkg.com/vue@next"></script>
     <div id="app"></div>
     <script>
-        const app = Vue.createApp({
-            data() {
-                return {
-                    text: "Sesión abierta",
-                    open: "true",
-                    userName: "",
-                    posts: [{
-                        title: "Titulo 1",
-                        description: "Lorem ipsum..."
-                    }, {
-                        title: "Titulo 2",
-                        description: "Lorem ipsum..."
-                    }, {
-                        title: "Titulo 3",
-                        description: "Lorem ipsum..."
-                    }, {
-                        title: "Titulo 4",
-                        description: "Lorem ipsum..."
-                    }]
-                   
-                };
-            },
-
-            watch: {
-                open(value){
-                    if (value){
-                        this.text = "Sesión abierta";
-                    } else {
-                        this.text = "Sesión cerrada";
-                    }
-                    
-                }
-            },
-
-            computed: {
-               
-                classType(){  
-                    if(this.open){
-                        return ['opened'];
-                    } else {
-                        this.userName = "";
-                        return ['closed'];
-                        
-                    }
-                }
-
-            }, 
-                            
-            template: `<div class="main" :class="classType">
-            <p >{{ text }}</p>
-            <div v-if="open">
-                <p>Hola, {{ userName }}!</p>
-                <h1>Bienvenida nuevamente!</h1>
-                <p>Aquí encontrarás los comentarios de tus amigos</p>
-                <div class="coments">
-                    <item v-for="(i, id) in posts" 
-                    :key="id"
-                    :post="i" 
-                    />
-                    
-                </div>
-                 
+        const app = Vue.createApp({                         
+            template: `
+            <div>
+                <v-main>
+                    <template v-slot:news>
+                        <p>Here you will find the news</p>
+                        <button>Let's go!</button>
+                    </template>
+                    <template v-slot:photos>
+                        <p>Here you will find the photos</p>
+                    </template>
+                </v-main>
             </div>
-            <div v-else>
-                <label>
-                    <span>User name</span>
-                    <input type="text" v-model="userName" />
-                    
-                </label>
-            </div>
-            <button @click="open = !open" >
-                <div v-if="!open">Iniciar sesión</div>
-                <div v-else>Cerrar sesión</div>
-            </button>
-
-        </div>
             `
     
          })
          
-         app.component ("item", {
-
-            props: ["post"],
+         app.component ("v-main", {
 
             template: `
-                <div class="coments">
-                    <h2>{{ post.title }}</h2>
-                    <p> {{post.description}}</p>
-                </div>
+                <section>
+                    <slot name="news"> </slot>
+                </section>
+                <section>
+                    <slot name="photos"> </slot>
+                </section>
                 `
          })
 
