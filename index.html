@@ -12,33 +12,33 @@
     <script src="https://unpkg.com/vue@next"></script>
     <div id="app"></div>
     <script>
-        const app = Vue.createApp({                         
+        const app = Vue.createApp({   
+            data(){
+                return {
+                    list: ["uno", "dos", "tres", ,] // dejo las comas al final vacías para que ahí se ponga el texto que defino como default
+                };
+            },                      
             template: `
             <div>
-                <v-main>
-                    <template v-slot:news>
-                        <p>Here you will find the news</p>
-                        <button>Let's go!</button>
-                    </template>
-                    <template v-slot:photos>
-                        <p>Here you will find the photos</p>
-                    </template>
-                </v-main>
+                <ul>
+                    <v-listItem v-for="item in list" :text="item"></v-listItem>
+                </ul>
+
+                
             </div>
             `
     
          })
          
-         app.component ("v-main", {
+         app.component ("v-listItem", {
 
-            template: `
-                <section>
-                    <slot name="news"> </slot>
-                </section>
-                <section>
-                    <slot name="photos"> </slot>
-                </section>
-                `
+            props:{
+                text: {
+                    default: "texto vacío"
+                }
+            },
+
+            template: `<li>{{ text }}</li>`
          })
 
          const vm = app.mount("#app");
