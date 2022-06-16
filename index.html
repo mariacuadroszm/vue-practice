@@ -12,48 +12,43 @@
     <script src="https://unpkg.com/vue@next"></script>
     <div id="app"></div>
     <script>
-        const app = Vue.createApp({   
+        const app = Vue.createApp({
+            
             data(){
                 return {
-                    list: ["uno", "dos", "tres"] 
-                };
-            },
-            methods:{
-                borrar(id){
-                    this.list = this.list.filter((i,index) => index !== id);
+                    texto: "Hola Mar!"
                 }
-
-            },                      
+            },
+  //info es la variable que va a recibir el prop y texto y la variable que va a cambiar y que tengo en mi data
             template: `
-            <div>
-                <ul>
-                    <v-listItem 
-                        v-for="(item, id) in list" 
-                        :text="item"
-                        v-on:remove="borrar(id)"
-                    />
-                </ul>
-            </div>
+                <div>
+                    <p>{{ texto }}</p>
+                    <v-input v-model:info="texto" 
+                    />    
+                </div>
+            
+            
             `
-    
-         })
-         
-         app.component ("v-listItem", {
-
+        })
+        app.component("v-input", {
+            // recibo la variable del v-model como prop
             props:{
-                text: String
+                info: String
             },
 
             methods: {
-                rm(){
-                    this.$emit("remove");
-
+                inputText(e){
+                    this.$emit("update:info", e.target.value);
                 }
             },
+         
+           template: `
+            <input type="text" :value="info" v-on:input="inputText"/> 
+            `
 
-            template: `<li v-on:click="rm">{{ text }}</li>`
-         })
 
+        })
+         
          const vm = app.mount("#app");
     </script>
     
