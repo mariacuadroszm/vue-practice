@@ -15,16 +15,24 @@
         const app = Vue.createApp({   
             data(){
                 return {
-                    list: ["uno", "dos", "tres", ,] // dejo las comas al final vacías para que ahí se ponga el texto que defino como default
+                    list: ["uno", "dos", "tres"] 
                 };
+            },
+            methods:{
+                borrar(id){
+                    this.list = this.list.filter((i,index) => index !== id);
+                }
+
             },                      
             template: `
             <div>
                 <ul>
-                    <v-listItem v-for="item in list" :text="item"></v-listItem>
+                    <v-listItem 
+                        v-for="(item, id) in list" 
+                        :text="item"
+                        v-on:remove="borrar(id)"
+                    />
                 </ul>
-
-                
             </div>
             `
     
@@ -33,12 +41,17 @@
          app.component ("v-listItem", {
 
             props:{
-                text: {
-                    default: "texto vacío"
+                text: String
+            },
+
+            methods: {
+                rm(){
+                    this.$emit("remove");
+
                 }
             },
 
-            template: `<li>{{ text }}</li>`
+            template: `<li v-on:click="rm">{{ text }}</li>`
          })
 
          const vm = app.mount("#app");
