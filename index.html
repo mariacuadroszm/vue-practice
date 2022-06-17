@@ -16,38 +16,43 @@
             
             data(){
                 return {
-                    texto: "Hola Mar!"
+                    texto: "Hola Mar jiji!"
                 }
             },
-  //info es la variable que va a recibir el prop y texto y la variable que va a cambiar y que tengo en mi data
+
+            provide(){ //debe ser un método para que actualice constante el valor de la variable otroTexto según cambie texto
+                return{
+                    otroTexto: this.texto  
+                }
+
+            },
+
             template: `
                 <div>
                     <p>{{ texto }}</p>
-                    <v-input v-model:info="texto" 
-                    />    
-                </div>
-            
-            
+                    <v-otro />
+                </div>   
             `
         })
-        app.component("v-input", {
-            // recibo la variable del v-model como prop
-            props:{
-                info: String
-            },
-
-            methods: {
-                inputText(e){
-                    this.$emit("update:info", e.target.value);
-                }
-            },
-         
+        app.component("v-otro", {
+                     
            template: `
-            <input type="text" :value="info" v-on:input="inputText"/> 
+           <v-tercer />
+            
             `
-
-
         })
+
+        app.component("v-tercer", {
+
+            inject: ["otroTexto"],
+                     
+            template: `
+            <p>{{ otroTexto }}</p>
+            `
+            })
+
+
+
          
          const vm = app.mount("#app");
     </script>
